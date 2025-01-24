@@ -5,11 +5,15 @@ import { text3 } from '@/lib/steps-text/step3';
 import { text4 } from '@/lib/steps-text/step4';
 import { text5 } from '@/lib/steps-text/step5';
 import { text6 } from '@/lib/steps-text/step6';
+import { text7 } from '@/lib/steps-text/step7';
+import { text8 } from '@/lib/steps-text/step8';
+import { text9 } from '@/lib/steps-text/step9';
 
 export type StepData = {
 	step: number;
 	description: string;
 	correctAnswer: string;
+	correctAnswer2?: string;
 	incorrectAnswer: string;
 	correctAnswerStep: number;
 	incorrectAnswerStep: number;
@@ -77,7 +81,35 @@ export const stepsData: StepData[] = [
 		correctAnswer: 'y',
 		incorrectAnswer: '',
 		correctAnswerStep: 7,
-		incorrectAnswerStep: 6, // leave him in the same step
+		incorrectAnswerStep: 6,
+		errorMessage: '',
+	},
+	{
+		step: 7,
+		description: text7.replace(/\n/g, '<br />'),
+		correctAnswer: 'create.role {title:editor, actions: view, edit}',
+		correctAnswer2: 'create.role {title:moderator, actions: view, create, edit, delete}',
+		incorrectAnswer: '',
+		correctAnswerStep: 9,
+		incorrectAnswerStep: 8,
+		errorMessage: '',
+	},
+	{
+		step: 8,
+		description: text8.replace(/\n/g, '<br />'),
+		correctAnswer: 'y',
+		incorrectAnswer: '',
+		correctAnswerStep: 7,
+		incorrectAnswerStep: 8,
+		errorMessage: '',
+	},
+	{
+		step: 9,
+		description: text9.replace(/\n/g, '<br />'),
+		correctAnswer: 'create.role {title:admin, actions: assign.role, list.role, delete.role}',
+		incorrectAnswer: '',
+		correctAnswerStep: 11,
+		incorrectAnswerStep: 10,
 		errorMessage: '',
 	},
 ];

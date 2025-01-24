@@ -3,9 +3,9 @@ export const text0 = `> Initializing connection
 > New user detected
 > Role required
 > Role auto-assignment initiated
-> Assigning new user <Visitor> role
+> Assigning new user &lt;Visitor> role
 > Role auto-assignment failed
-> Assigning new user <Creator> role
+> Assigning new user &lt;Creator> role
 > Role assignment successful 
 .
 .

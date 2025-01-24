@@ -1,4 +1,4 @@
-export const text6 = `> <viewer> role created successfully
+export const text6 = `> &lt;viewer> role created successfully
 .
 .
 .
@@ -13,20 +13,20 @@ export const text6 = `> <viewer> role created successfully
 .
 .
 .
->> assigning a role is done using the <assign.role> command
+>> assigning a role is done using the &lt;assign.role> command
 >> the syntax is: assign.role {role:username}
 .
 .
 .
 >> simple stuff. . .
 >> you should not be able to assign roles yet
->> i'll assign the new role you created, <viewer>, to <<james546>>
->> this should give them access to the <read> action
+>> i'll assign the new role you created, &lt;viewer>, to &lt;&lt;james546>>
+>> this should give them access to the &lt;read> action
 .
 .
 .
 > assign.role {viewer:james546}
-> <viewer> role successfully assigned to user <<james546>>
+> &lt;viewer> role successfully assigned to user &lt;&lt;james546>>
 .
 .
 .
