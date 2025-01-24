@@ -1,4 +1,4 @@
-export const step10 = `> False input detected
+export const text10 = `> False input detected
 > Running debuger
 > ERROR: UNAUTHORIZED ACCESS DETECTED
 .
