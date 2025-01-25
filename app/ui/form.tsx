@@ -23,7 +23,7 @@ export function Form() {
   const [step, setStep] = useAtom(stepAtom);
   const [state] = useAtom(stepsAtom);
 
-  function correctAnswer(userValue: string, step: number, allWrong = false) {
+  function correctAnswer(userValue: string, step: number) {
     setError(false);
     if (
       userValue.toLowerCase() === state[step].correctAnswer.toLowerCase() ||
@@ -34,8 +34,46 @@ export function Form() {
       userValue.toLowerCase() === state[step].incorrectAnswer.toLowerCase()
     ) {
       setStep(state[step].incorrectAnswerStep);
-    } else if (allWrong) {
+    } else if (state[step].incorrectAnswer === "") {
       setStep(state[step].incorrectAnswerStep);
+    }
+  }
+
+  function handleStep0(userValue: string) {
+    const userValueNotEmpty = userValue !== "";
+    setError(true);
+    if (step === 0 && userValueNotEmpty) {
+      setError(false);
+      setUserNameAtom(userValue);
+      setStep(1);
+    }
+  }
+
+  function handleStep7(userValue: string) {
+    const userValueNotEmpty = userValue !== "";
+    setError(true);
+
+    if (userValueNotEmpty) {
+      const userValueLower = userValue.toLowerCase(); // use Value
+
+      const isNewAnswer = userAnswer !== userValueLower;
+      const isCorrectAnswer =
+        userValueLower === state[7].correctAnswer.toLowerCase() ||
+        userValueLower === state[7].correctAnswer2?.toLowerCase() ||
+        userValueLower === "gg";
+
+      if (!state7 && isCorrectAnswer) {
+        setUserAnswer(userValue);
+        setState7(true);
+        setError(false);
+      } else if (state7 && isNewAnswer && isCorrectAnswer) {
+        setStep(state[7].correctAnswerStep);
+        setError(false);
+      } else {
+        setStep(state[7].incorrectAnswerStep);
+      }
+    } else {
+      setError(true);
     }
   }
 
@@ -46,73 +84,14 @@ export function Form() {
 
     switch (step) {
       case 0:
-        setError(true);
-        if (step === 0 && userValueNotEmpty) {
-          setError(false);
-          setUserNameAtom(userValue);
-          setStep(1);
-        }
-        break;
-      case 1:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
-        break;
-      case 2:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
-        break;
-      case 3:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
-        break;
-      case 4:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
-        break;
-      case 5:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
-        break;
-      case 6:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
+        handleStep0(userValue);
         break;
       case 7:
-        setError(true);
-
-        if (userValueNotEmpty) {
-          const userValueLower = userValue.toLowerCase(); // use Value
-
-          const isNewAnswer = userAnswer !== userValueLower;
-          const isCorrectAnswer =
-            userValueLower === state[7].correctAnswer.toLowerCase() ||
-            userValueLower === state[7].correctAnswer2?.toLowerCase() ||
-            userValueLower === "gg";
-
-          if (!state7 && isCorrectAnswer) {
-            setUserAnswer(userValue);
-            setState7(true);
-            setError(false);
-          } else if (state7 && isNewAnswer && isCorrectAnswer) {
-            setStep(state[7].correctAnswerStep);
-            setError(false);
-          } else {
-            setStep(state[7].incorrectAnswerStep);
-          }
-        } else {
-          setError(true);
-        }
-        break;
-      case 8:
-        setState7(false);
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
-      case 9:
-        if (userValueNotEmpty) correctAnswer(userValue, step, true);
-        else setError(true);
+        handleStep7(userValue);
         break;
       default:
-      // code block
+        if (userValueNotEmpty) correctAnswer(userValue, step);
+        else setError(true);
     }
 
     setUsername("");
