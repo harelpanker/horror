@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
+import BackgroundAnimation from '@/app/ui/background-animation';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -17,7 +18,10 @@ type LayoutProps = { children: React.ReactNode };
 export default function RootLayout({ children }: Readonly<LayoutProps>) {
 	return (
 		<html lang='en' dir='ltr'>
-			<body className={`${spaceGrotesk.variable} font-spaceGrotesk antialiased`}>{children}</body>
+			<body className={`${spaceGrotesk.variable} font-spaceGrotesk antialiased`}>
+				<main className='relative z-20'>{children}</main>
+				<BackgroundAnimation />
+			</body>
 		</html>
 	);
 }

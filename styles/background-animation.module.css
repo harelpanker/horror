@@ -1,0 +1,79 @@
+/* @layer utilities {} */
+.background_animation {
+  @apply fixed inset-0 z-10 h-dvh w-full;
+  --color-bg1: rgb(17, 17, 17);
+  --color-bg2: rgb(0, 0, 0);
+  --color1: 41, 199, 209;
+  --color2: 232, 237, 239;
+  --color-interactive: 41, 199, 209;
+  --circle-size: 70%;
+  --blending: hard-light;
+  --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.25' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+.noise_bg {
+  @apply absolute left-0 top-0 z-10 h-full w-full opacity-10 mix-blend-overlay;
+  background-image: var(--noise);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+.gradients_container {
+  @apply h-full w-full;
+  filter: blur(80px);
+}
+.g1 {
+  position: absolute;
+  background: radial-gradient(
+      circle at top center,
+      rgba(var(--color1), 0.7) 0,
+      rgba(var(--color1), 0) 40%
+    )
+    no-repeat;
+  mix-blend-mode: var(--blending);
+  width: var(--circle-size);
+  height: var(--circle-size);
+  top: calc(50% - var(--circle-size) / 2);
+  left: calc(50% - var(--circle-size) / 2);
+  transform-origin: center center;
+  animation: moveVertical 30s ease infinite;
+}
+.g2 {
+  position: absolute;
+  background: radial-gradient(
+      circle at top center,
+      rgba(var(--color2), 0.6) 0,
+      rgba(var(--color2), 0) 35%
+    )
+    no-repeat;
+  mix-blend-mode: var(--blending);
+
+  width: var(--circle-size);
+  height: var(--circle-size);
+  top: calc(50% - var(--circle-size) / 2);
+  left: calc(50% - var(--circle-size) / 6);
+
+  transform-origin: calc(50% - 400px);
+  animation: moveInCircle 50s reverse infinite;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}

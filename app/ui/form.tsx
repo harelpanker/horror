@@ -3,7 +3,7 @@
 // https://www.notion.so/Creating-base-outline-for-Permit-Horror-V3-JSON-mapping-c653b30f7a4542cdb39bda2e38e18e24
 import { useAtom } from 'jotai';
 import { useState } from 'react';
-import { Description, Field, Label } from '@headlessui/react';
+import { Description, Field } from '@headlessui/react';
 import { stepsAtom, stepAtom, usernameAtom } from '@/lib/state/app-state';
 // import { TextEffect } from '@/app/ui/text-effect';
 import { Input } from './input';
