@@ -29,7 +29,7 @@ export type StepData = {
 export const stepsData: StepData[] = [
   {
     step: 0,
-    description: text0.replace(/\n/g, "<br />"),
+    description: text0,
     correctAnswer: "",
     incorrectAnswer: "",
     correctAnswerStep: 1,
@@ -38,7 +38,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 1,
-    description: text1.replace(/\n/g, "<br />"),
+    description: text1,
     correctAnswer: "y",
     incorrectAnswer: "n",
     correctAnswerStep: 3,
@@ -47,7 +47,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 2,
-    description: text2.replace(/\n/g, "<br />"),
+    description: text2,
     correctAnswer: "y",
     incorrectAnswer: "",
     correctAnswerStep: 0,
@@ -56,7 +56,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 3,
-    description: text3.replace(/\n/g, "<br />"),
+    description: text3,
     correctAnswer: "y",
     incorrectAnswer: "n",
     correctAnswerStep: 4,
@@ -65,7 +65,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 4,
-    description: text4.replace(/\n/g, "<br />"),
+    description: text4,
     correctAnswer: "create.role {title:viewer, actions: read}",
     incorrectAnswer: "",
     correctAnswerStep: 6,
@@ -74,7 +74,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 5,
-    description: text5.replace(/\n/g, "<br />"),
+    description: text5,
     correctAnswer: "y",
     incorrectAnswer: "",
     correctAnswerStep: 4,
@@ -83,7 +83,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 6,
-    description: text6.replace(/\n/g, "<br />"),
+    description: text6,
     correctAnswer: "y",
     incorrectAnswer: "",
     correctAnswerStep: 7,
@@ -92,7 +92,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 7,
-    description: text7.replace(/\n/g, "<br />"),
+    description: text7,
     correctAnswer: "create.role {title:editor, actions: view, edit}",
     correctAnswer2:
       "create.role {title:moderator, actions: view, create, edit, delete}",
@@ -103,7 +103,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 8,
-    description: text8.replace(/\n/g, "<br />"),
+    description: text8,
     correctAnswer: "y",
     incorrectAnswer: "",
     correctAnswerStep: 7,
@@ -112,7 +112,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 9,
-    description: text9.replace(/\n/g, "<br />"),
+    description: text9,
     correctAnswer:
       "create.role {title:admin, actions: assign.role, list.role, delete.role}",
     incorrectAnswer: "",
@@ -122,7 +122,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 10,
-    description: text10.replace(/\n/g, "<br />"),
+    description: text10,
     correctAnswer: "y",
     incorrectAnswer: "",
     correctAnswerStep: 9,
@@ -131,7 +131,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 11,
-    description: text11.replace(/\n/g, "<br />"),
+    description: text11,
     correctAnswer: "y",
     incorrectAnswer: "",
     correctAnswerStep: 12,
@@ -140,7 +140,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 12,
-    description: text12.replace(/\n/g, "<br />"),
+    description: text12,
     correctAnswer: "assing.role {editor:roy234}",
     incorrectAnswer: "",
     correctAnswerStep: 13,
@@ -149,7 +149,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 13,
-    description: text13.replace(/\n/g, "<br />"),
+    description: text13,
     correctAnswer: "assing.role {viewer:joseph912}",
     incorrectAnswer: "",
     correctAnswerStep: 14,
@@ -158,7 +158,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 14,
-    description: text14.replace(/\n/g, "<br />"),
+    description: text14,
     correctAnswer: "assing.role {editor:robert791}",
     incorrectAnswer: "",
     correctAnswerStep: 15,
@@ -167,7 +167,7 @@ export const stepsData: StepData[] = [
   },
   {
     step: 15,
-    description: text15.replace(/\n/g, "<br />"),
+    description: text15,
     correctAnswer: "",
     incorrectAnswer: "",
     correctAnswerStep: 15,
