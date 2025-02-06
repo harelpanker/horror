@@ -37,16 +37,19 @@ const AnimatedTextDisplay = ({ text, step }: { text: string; step: number }) => 
 
 	return (
 		<div className='flex flex-col gap-y-1'>
-			{lines.map((line, index) => (
-				<div
-					key={`${key}-${index}`}
-					className='opacity-0 transition-opacity duration-300'
-					style={{
-						opacity: visibleLines.includes(index) ? 1 : 0,
-					}}>
-					{visibleLines.includes(index) && <TypingAnimation key={`effect-${key}-${index}`}>{line}</TypingAnimation>}
-				</div>
-			))}
+			{lines.map((line, index) => {
+				const isDialogue = line.trim().startsWith('>>');
+				return (
+					<div
+						key={`${key}-${index}`}
+						className={`opacity-0 transition-opacity duration-300 ${isDialogue ? 'text-cyan-300' : 'text-green-300'}`}
+						style={{
+							opacity: visibleLines.includes(index) ? 1 : 0,
+						}}>
+						{visibleLines.includes(index) && <TypingAnimation key={`effect-${key}-${index}`}>{line}</TypingAnimation>}
+					</div>
+				);
+			})}
 		</div>
 	);
 };
