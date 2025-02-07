@@ -6,7 +6,7 @@ export function EndGame() {
 	return (
 		<Container>
 			<div className='flex grow flex-col items-center justify-center gap-y-8 text-balance text-center font-spaceGrotesk text-2xl font-semibold lg:text-4xl'>
-				<h1>Don't want to be stuck in an infinite authorization loop?</h1>
+				<h1>Don&apos;t want to be stuck in an infinite authorization loop?</h1>
 				<div className='group relative'>
 					<GlowEffect
 						colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
