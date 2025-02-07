@@ -8,7 +8,7 @@ const decodeHtmlEntities = (text: string): string => {
 	return textArea.value;
 };
 
-const AnimatedTextDisplay = ({ text, step }: { text: string; step: number }) => {
+const AnimatedTextDisplay = ({ text, step, playerName }: { text: string; step: number; playerName?: string }) => {
 	const [key, setKey] = useState(0);
 	const [visibleLines, setVisibleLines] = useState<number[]>([]);
 	const [lines, setLines] = useState<string[]>([]);
@@ -17,23 +17,24 @@ const AnimatedTextDisplay = ({ text, step }: { text: string; step: number }) => 
 		const newLines = text
 			.split('\n')
 			.filter((line) => line.trim())
-			.map((line) => decodeHtmlEntities(line));
+			.map((line) => decodeHtmlEntities(line))
+			.map((line) => line.replace(/<player\.name>/g, playerName || 'Guest')); // Replace with playerName or fallback
 
 		setLines(newLines);
 		setVisibleLines([]);
 		setKey((prev) => prev + 1);
 
-		let totalDelay = 0; // Track cumulative delay for sequential animations
-		const typingSpeed = 50; // Approximate typing speed per character (adjust as needed)
+		let totalDelay = 0;
+		const typingSpeed = 50;
 
 		newLines.forEach((line, index) => {
-			const lineDelay = line.length * typingSpeed; // Calculate delay based on line length
+			const lineDelay = line.length * typingSpeed;
 			setTimeout(() => {
 				setVisibleLines((prev) => [...prev, index]);
 			}, totalDelay);
-			totalDelay += lineDelay + 700; // Add extra delay after each line to simulate natural pauses
+			totalDelay += lineDelay + 500;
 		});
-	}, [text, step]);
+	}, [text, step, playerName]);
 
 	return (
 		<div className='flex flex-col gap-y-1'>
@@ -42,7 +43,7 @@ const AnimatedTextDisplay = ({ text, step }: { text: string; step: number }) => 
 				return (
 					<div
 						key={`${key}-${index}`}
-						className={`opacity-0 transition-opacity duration-300 ${isDialogue ? 'text-cyan-300' : 'text-green-300'}`}
+						className={`opacity-0 transition-opacity duration-300 ${isDialogue ? 'text-sky-300' : 'text-emerald-300'}`}
 						style={{
 							opacity: visibleLines.includes(index) ? 1 : 0,
 						}}>

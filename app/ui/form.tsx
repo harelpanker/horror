@@ -94,13 +94,10 @@ export function Form() {
 		<form onSubmit={handleSubmit} className='mx-auto w-full max-w-screen-sm'>
 			<Field className='flex flex-col gap-y-8'>
 				<div className='flex flex-col gap-y-4'>
-					{step === 1 && <p className=''>{'>> Hi ' + userName}</p>}
+					<AnimatedTextDisplay text={state[step].description} step={step} playerName={userName} />
 
-					<AnimatedTextDisplay text={state[step].description} step={step} />
-
-					{/* error */}
 					{error && (
-						<p className=''>
+						<p className='text-orange-400'>
 							{state[step].errorMessage === '' ? '> Unrecognized input' : state[step].errorMessage || ''}
 						</p>
 					)}

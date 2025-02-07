@@ -15,7 +15,7 @@ export const text11 = `> &lt;admin> role created successfully
 .
 .
 > assign.role {admin:David}
-> &lt;admin> role successfully assigned to user &lt;David>
+> &lt;admin> role successfully assigned to user <player.name>
 .
 .
 .
