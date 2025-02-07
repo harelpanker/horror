@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { Field } from '@headlessui/react';
 import { stepsAtom, stepAtom, usernameAtom } from '@/lib/state/app-state';
 import AnimatedTextDisplay from '@/app/ui/animated-text-desplay';
-import { Input } from './input';
+import { Input } from '@/app/ui/input';
+import { EndGame } from '@/app/ui/end-game';
 
 interface FormElements extends HTMLFormControlsCollection {
 	usernameInput: HTMLInputElement;
@@ -19,8 +20,9 @@ export function Form() {
 	const [userAnswer, setUserAnswer] = useState('');
 	const [error, setError] = useState(false);
 	const [state7, setState7] = useState(false);
-	const [state15, setState15] = useState(false);
+	const [type, setType] = useState(false);
 	const [username, setUsername] = useState('');
+	const [endGame, setEndGame] = useState(false);
 	const [userName, setUserNameAtom] = useAtom(usernameAtom);
 	const [step, setStep] = useAtom(stepAtom);
 	const [state] = useAtom(stepsAtom);
@@ -71,16 +73,11 @@ export function Form() {
 			setError(true);
 		}
 	}
-	function handleStep15(userValue: string) {
-		// i want it to happen after the typing animation ends
+	function handleEndGame() {
 		setTimeout(() => {
-			correctAnswer(userValue, step);
+			if (step === 15) setStep(16);
+			if (step === 16) setEndGame(true);
 		}, 3000);
-	}
-	function handleStep16(userValue: string) {
-		setError(false);
-		setUserNameAtom(userValue);
-		setStep(1);
 	}
 
 	function handleSubmit(event: React.FormEvent<FormElement>) {
@@ -95,12 +92,6 @@ export function Form() {
 			case 7:
 				handleStep7(userValue);
 				break;
-			case 15:
-				handleStep15(userValue);
-				break;
-			case 16:
-				handleStep16(userValue);
-				break;
 			default:
 				if (userValueNotEmpty) correctAnswer(userValue, step);
 				else setError(true);
@@ -108,25 +99,47 @@ export function Form() {
 
 		setUsername('');
 	}
+
 	return (
-		<form onSubmit={handleSubmit} className='mx-auto w-full max-w-screen-sm'>
-			<Field className='flex flex-col gap-y-8'>
-				<div className='flex flex-col gap-y-4'>
-					<h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2>
+		<>
+			{endGame ? (
+				<EndGame />
+			) : (
+				<form onSubmit={handleSubmit} className='mx-auto w-full max-w-screen-sm'>
+					<Field className='flex flex-col gap-y-8'>
+						<div className='flex flex-col gap-y-4'>
+							<h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2>
 
-					<AnimatedTextDisplay text={state[step].description} step={step} playerName={userName} />
+							<AnimatedTextDisplay
+								text={state[step].description}
+								step={step}
+								playerName={userName}
+								onTypingStart={() => setType(true)}
+								onTypingEnd={() => {
+									setType(false);
+									if (step === 15 || step === 16) handleEndGame();
+								}}
+							/>
 
-					{error && (
-						<p className='text-orange-400'>
-							{state[step].errorMessage === '' ? '> Unrecognized input' : state[step].errorMessage || ''}
-						</p>
-					)}
-				</div>
+							{error && (
+								<p className='text-orange-400'>
+									{state[step].errorMessage === '' ? '> Unrecognized input' : state[step].errorMessage || ''}
+								</p>
+							)}
+						</div>
 
-				{step !== 15 ? (
-					<Input id='usernameInput' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-				) : null}
-			</Field>
-		</form>
+						{!type && step !== 15 && step !== 16 ? (
+							<Input
+								autoFocus
+								id='usernameInput'
+								type='text'
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+						) : null}
+					</Field>
+				</form>
+			)}
+		</>
 	);
 }

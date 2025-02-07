@@ -8,7 +8,19 @@ const decodeHtmlEntities = (text: string): string => {
 	return textArea.value;
 };
 
-const AnimatedTextDisplay = ({ text, step, playerName }: { text: string; step: number; playerName?: string }) => {
+const AnimatedTextDisplay = ({
+	text,
+	step,
+	playerName,
+	onTypingStart,
+	onTypingEnd,
+}: {
+	text: string;
+	step: number;
+	playerName?: string;
+	onTypingStart?: () => void;
+	onTypingEnd?: () => void;
+}) => {
 	const [key, setKey] = useState(0);
 	const [visibleLines, setVisibleLines] = useState<number[]>([]);
 	const [lines, setLines] = useState<string[]>([]);
@@ -18,7 +30,7 @@ const AnimatedTextDisplay = ({ text, step, playerName }: { text: string; step: n
 			.split('\n')
 			.filter((line) => line.trim())
 			.map((line) => decodeHtmlEntities(line))
-			.map((line) => line.replace(/<player\.name>/g, playerName || 'Guest')); // Replace with playerName or fallback
+			.map((line) => line.replace(/<player\.name>/g, playerName || 'Guest'));
 
 		setLines(newLines);
 		setVisibleLines([]);
@@ -27,10 +39,15 @@ const AnimatedTextDisplay = ({ text, step, playerName }: { text: string; step: n
 		let totalDelay = 0;
 		const typingSpeed = 50;
 
+		if (onTypingStart) onTypingStart(); // Notify start
+
 		newLines.forEach((line, index) => {
 			const lineDelay = line.length * typingSpeed;
 			setTimeout(() => {
 				setVisibleLines((prev) => [...prev, index]);
+				if (index === newLines.length - 1 && onTypingEnd) {
+					setTimeout(onTypingEnd, lineDelay); // Notify end after last line
+				}
 			}, totalDelay);
 			totalDelay += lineDelay + 500;
 		});

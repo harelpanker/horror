@@ -1,8 +1,8 @@
 export const text15 = `> &lt;editor> role successfully assigned to user &lt;robert791>
 .
 .
->>i can't keep doing this forever.
->>i can't bevieve I fell for it.
+>> i can't keep doing this forever.
+>> i can't bevieve I fell for it.
 .
 .
 .
