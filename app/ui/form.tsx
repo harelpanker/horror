@@ -19,6 +19,7 @@ export function Form() {
 	const [userAnswer, setUserAnswer] = useState('');
 	const [error, setError] = useState(false);
 	const [state7, setState7] = useState(false);
+	const [state15, setState15] = useState(false);
 	const [username, setUsername] = useState('');
 	const [userName, setUserNameAtom] = useAtom(usernameAtom);
 	const [step, setStep] = useAtom(stepAtom);
@@ -70,6 +71,17 @@ export function Form() {
 			setError(true);
 		}
 	}
+	function handleStep15(userValue: string) {
+		// i want it to happen after the typing animation ends
+		setTimeout(() => {
+			correctAnswer(userValue, step);
+		}, 3000);
+	}
+	function handleStep16(userValue: string) {
+		setError(false);
+		setUserNameAtom(userValue);
+		setStep(1);
+	}
 
 	function handleSubmit(event: React.FormEvent<FormElement>) {
 		event.preventDefault();
@@ -83,6 +95,12 @@ export function Form() {
 			case 7:
 				handleStep7(userValue);
 				break;
+			case 15:
+				handleStep15(userValue);
+				break;
+			case 16:
+				handleStep16(userValue);
+				break;
 			default:
 				if (userValueNotEmpty) correctAnswer(userValue, step);
 				else setError(true);
@@ -94,6 +112,8 @@ export function Form() {
 		<form onSubmit={handleSubmit} className='mx-auto w-full max-w-screen-sm'>
 			<Field className='flex flex-col gap-y-8'>
 				<div className='flex flex-col gap-y-4'>
+					<h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2>
+
 					<AnimatedTextDisplay text={state[step].description} step={step} playerName={userName} />
 
 					{error && (
@@ -103,7 +123,9 @@ export function Form() {
 					)}
 				</div>
 
-				<Input id='usernameInput' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+				{step !== 15 ? (
+					<Input id='usernameInput' type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
+				) : null}
 			</Field>
 		</form>
 	);
