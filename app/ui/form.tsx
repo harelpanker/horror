@@ -108,7 +108,7 @@ export function Form() {
 				<form onSubmit={handleSubmit} className='mx-auto w-full max-w-screen-sm'>
 					<Field className='flex flex-col gap-y-8'>
 						<div className='flex flex-col gap-y-4'>
-							<h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2>
+							{/* <h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2> */}
 
 							<AnimatedTextDisplay
 								text={state[step].description}
