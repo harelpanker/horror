@@ -22,7 +22,7 @@ type LayoutProps = { children: React.ReactNode };
 export default function RootLayout({ children }: Readonly<LayoutProps>) {
 	return (
 		<html lang='en' dir='ltr'>
-			<body className={`${inconsolata.variable} ${spaceGrotesk.variable} font-inconsolata antialiased`}>
+			<body className={`${inconsolata.variable} ${spaceGrotesk.variable} font-inconsolata antialiased 2xl:text-xl`}>
 				<main className='relative z-20'>{children}</main>
 				{/* <BackgroundAnimation /> */}
 			</body>
