@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 import { TypingAnimation } from './typing-animation';
 
@@ -40,21 +41,22 @@ const AnimatedTextDisplay = ({
 		setVisibleLines([]);
 		setKey((prev) => prev + 1);
 
-		let totalDelay = 0;
-		const typingSpeed = 25;
-
 		if (onTypingStart) onTypingStart(); // Notify start
 
-		newLines.forEach((line, index) => {
-			const lineDelay = line.length * typingSpeed;
-			setTimeout(() => {
+		let index = 0;
+		const revealNextLine = () => {
+			if (index < newLines.length) {
 				setVisibleLines((prev) => [...prev, index]);
-				if (index === newLines.length - 1 && onTypingEnd) {
-					setTimeout(onTypingEnd, lineDelay); // Notify end after last line
-				}
-			}, totalDelay);
-			totalDelay += lineDelay + 500;
-		});
+				const lineLength = newLines[index].length;
+				const lineDelay = lineLength * 10 + 400; // Typing speed + delay
+				index++;
+				setTimeout(revealNextLine, lineDelay);
+			} else if (onTypingEnd) {
+				onTypingEnd(); // Notify end when all lines are revealed
+			}
+		};
+
+		revealNextLine(); // Start revealing lines one by one
 	}, [text, step, playerName]);
 
 	return (
@@ -63,7 +65,7 @@ const AnimatedTextDisplay = ({
 				const isDialogue = line.trim().startsWith(`[${androidName}]:`);
 				return (
 					<div
-						key={`${key}-${index}`}
+						key={index}
 						className={`opacity-0 transition-opacity duration-300 ${isDialogue ? 'text-sky-300' : 'text-emerald-300'}`}
 						style={{
 							opacity: visibleLines.includes(index) ? 1 : 0,

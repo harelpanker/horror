@@ -6,12 +6,12 @@ export const text0 = `> Initializing connection
 > Assigning new user &lt;Visitor> role
 > Role auto-assignment failed
 > Assigning new user &lt;Creator> role
-> Role assignment successful 
+> Role assignment successful
 .
 .
 .
 .
 .
->> hello? is anyone there? 
+>> hello? is anyone there?
 >> oh hi there, i'm David. how did you get here?
 >> wait - never mind. what is your name?`;
