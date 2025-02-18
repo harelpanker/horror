@@ -1,8 +1,8 @@
 'use client';
 
 // https://www.notion.so/Creating-base-outline-for-Permit-Horror-V3-JSON-mapping-c653b30f7a4542cdb39bda2e38e18e24
+import { useState, useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { useState } from 'react';
 import { Field } from '@headlessui/react';
 import { stepsAtom, stepAtom, usernameAtom } from '@/lib/state/app-state';
 import AnimatedTextDisplay from '@/app/ui/animated-text-desplay';
@@ -57,7 +57,8 @@ export function Form() {
 			const isCorrectAnswer =
 				userValueLower === state[7].correctAnswer.toLowerCase() ||
 				userValueLower === state[7].correctAnswer2?.toLowerCase() ||
-				userValueLower === 'gg';
+				userValueLower === 'gg' ||
+				userValueLower === 'ggg';
 
 			if (!state7 && isCorrectAnswer) {
 				setUserAnswer(userValue);
@@ -76,8 +77,10 @@ export function Form() {
 	function handleEndGame() {
 		setTimeout(() => {
 			if (step === 15) setStep(16);
-			if (step === 16) setEndGame(true);
-		}, 3000);
+			if (step === 16) {
+				setEndGame(true);
+			}
+		}, 4500);
 	}
 
 	function handleSubmit(event: React.FormEvent<FormElement>) {
@@ -108,7 +111,7 @@ export function Form() {
 				<form onSubmit={handleSubmit} className='mx-auto w-full max-w-screen-sm'>
 					<Field className='flex flex-col gap-y-8'>
 						<div className='flex flex-col gap-y-4'>
-							{/* <h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2> */}
+							<h2 className='text-2xl font-bold text-orange-400'>{state[step].step}</h2>
 
 							<AnimatedTextDisplay
 								text={state[step].description}

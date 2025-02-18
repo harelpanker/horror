@@ -3,7 +3,7 @@ export const text16 = `> Role required
 > Assigning new user &lt;Visitor> role
 > Role auto-assignment failed
 > Assigning new user &lt;Creator> role
-> Role assignment successful 
+> Role assignment successful
 .
 .
 .

@@ -24,20 +24,24 @@ const AnimatedTextDisplay = ({
 	const [key, setKey] = useState(0);
 	const [visibleLines, setVisibleLines] = useState<number[]>([]);
 	const [lines, setLines] = useState<string[]>([]);
+	const [androidName, setAndroidName] = useState('David');
 
 	useEffect(() => {
+		setAndroidName(step < 15 ? 'David' : playerName || 'David');
+
 		const newLines = text
 			.split('\n')
 			.filter((line) => line.trim())
 			.map((line) => decodeHtmlEntities(line))
-			.map((line) => line.replace(/<player\.name>/g, playerName || 'Guest'));
+			.map((line) => line.replace(/<player\.name>/g, playerName || '[David]: '))
+			.map((line) => line.replace(/>>/g, `[${androidName}]:`));
 
 		setLines(newLines);
 		setVisibleLines([]);
 		setKey((prev) => prev + 1);
 
 		let totalDelay = 0;
-		const typingSpeed = 50;
+		const typingSpeed = 25;
 
 		if (onTypingStart) onTypingStart(); // Notify start
 
@@ -56,7 +60,7 @@ const AnimatedTextDisplay = ({
 	return (
 		<div className='flex flex-col gap-y-1'>
 			{lines.map((line, index) => {
-				const isDialogue = line.trim().startsWith('>>');
+				const isDialogue = line.trim().startsWith(`[${androidName}]:`);
 				return (
 					<div
 						key={`${key}-${index}`}
