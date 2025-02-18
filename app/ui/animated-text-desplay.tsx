@@ -43,22 +43,21 @@ const AnimatedTextDisplay = ({
 		setVisibleLines([]);
 		setKey((prev) => prev + 1);
 
+		let totalDelay = 0;
+		const typingSpeed = isErrorStep ? 2 : 10;
+
 		if (onTypingStart) onTypingStart(); // Notify start
 
-		let index = 0;
-		const revealNextLine = () => {
-			if (index < newLines.length) {
+		newLines.forEach((line, index) => {
+			const lineDelay = line.length * typingSpeed;
+			setTimeout(() => {
 				setVisibleLines((prev) => [...prev, index]);
-				const lineLength = newLines[index].length;
-				const lineDelay = lineLength * 10 + 500; // Typing speed + delay
-				index++;
-				setTimeout(revealNextLine, lineDelay);
-			} else if (onTypingEnd) {
-				onTypingEnd(); // Notify end when all lines are revealed
-			}
-		};
-
-		revealNextLine(); // Start revealing lines one by one
+				if (index === newLines.length - 1 && onTypingEnd) {
+					setTimeout(onTypingEnd, lineDelay); // Notify end after last line
+				}
+			}, totalDelay);
+			totalDelay += lineDelay + 700;
+		});
 	}, [text, step, playerName]);
 
 	return (
@@ -67,13 +66,13 @@ const AnimatedTextDisplay = ({
 				const isDialogue = line.trim().startsWith(`[${androidName}]:`);
 				return (
 					<div
-						key={index}
+						key={`${key}-${index}`}
 						className={`opacity-0 transition-opacity duration-300 ${isDialogue ? 'text-sky-300' : 'text-emerald-300'}`}
 						style={{
 							opacity: visibleLines.includes(index) ? 1 : 0,
 						}}>
 						{visibleLines.includes(index) && (
-							<TypingAnimation duration={isErrorStep ? 5 : 40} key={`effect-${key}-${index}`}>
+							<TypingAnimation duration={isErrorStep ? 20 : 45} key={`effect-${key}-${index}`}>
 								{line}
 							</TypingAnimation>
 						)}

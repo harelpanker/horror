@@ -81,7 +81,7 @@ export function Form() {
 			if (step === 16) {
 				setEndGame(true);
 			}
-		}, 4500);
+		}, 3000);
 	}
 
 	function handleSubmit(event: React.FormEvent<FormElement>) {
