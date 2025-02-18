@@ -25,6 +25,7 @@ export type StepData = {
 	correctAnswerStep: number;
 	incorrectAnswerStep: number;
 	errorMessage: string;
+	isErrorStep?: boolean;
 };
 
 export type SyntaxData = {
@@ -116,6 +117,7 @@ export const stepsData: StepData[] = [
 		correctAnswerStep: 4,
 		incorrectAnswerStep: 5,
 		errorMessage: '',
+		isErrorStep: true,
 	},
 	{
 		step: 6,
@@ -144,6 +146,7 @@ export const stepsData: StepData[] = [
 		correctAnswerStep: 7,
 		incorrectAnswerStep: 8,
 		errorMessage: '',
+		isErrorStep: true,
 	},
 	{
 		step: 9,
@@ -162,6 +165,7 @@ export const stepsData: StepData[] = [
 		correctAnswerStep: 9,
 		incorrectAnswerStep: 10,
 		errorMessage: '',
+		isErrorStep: true,
 	},
 	{
 		step: 11,

@@ -118,6 +118,7 @@ export function Form() {
 								text={state[step].description}
 								step={step}
 								playerName={userName}
+								isErrorStep={state[step].isErrorStep}
 								onTypingStart={() => setType(true)}
 								onTypingEnd={() => {
 									setType(false);
@@ -131,8 +132,14 @@ export function Form() {
 								</p>
 							)}
 						</div>
-
-						{!type && step !== 15 && step !== 16 ? (
+						<Input
+							autoFocus
+							id='usernameInput'
+							type='text'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+						{/* {!type && step !== 15 && step !== 16 ? (
 							<Input
 								autoFocus
 								id='usernameInput'
@@ -140,7 +147,7 @@ export function Form() {
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 							/>
-						) : null}
+						) : null} */}
 					</Field>
 				</form>
 			)}

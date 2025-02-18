@@ -15,12 +15,14 @@ const AnimatedTextDisplay = ({
 	playerName,
 	onTypingStart,
 	onTypingEnd,
+	isErrorStep,
 }: {
 	text: string;
 	step: number;
 	playerName?: string;
 	onTypingStart?: () => void;
 	onTypingEnd?: () => void;
+	isErrorStep?: boolean;
 }) => {
 	const [key, setKey] = useState(0);
 	const [visibleLines, setVisibleLines] = useState<number[]>([]);
@@ -48,7 +50,7 @@ const AnimatedTextDisplay = ({
 			if (index < newLines.length) {
 				setVisibleLines((prev) => [...prev, index]);
 				const lineLength = newLines[index].length;
-				const lineDelay = lineLength * 10 + 400; // Typing speed + delay
+				const lineDelay = lineLength * 10 + 500; // Typing speed + delay
 				index++;
 				setTimeout(revealNextLine, lineDelay);
 			} else if (onTypingEnd) {
@@ -70,7 +72,11 @@ const AnimatedTextDisplay = ({
 						style={{
 							opacity: visibleLines.includes(index) ? 1 : 0,
 						}}>
-						{visibleLines.includes(index) && <TypingAnimation key={`effect-${key}-${index}`}>{line}</TypingAnimation>}
+						{visibleLines.includes(index) && (
+							<TypingAnimation duration={isErrorStep ? 5 : 40} key={`effect-${key}-${index}`}>
+								{line}
+							</TypingAnimation>
+						)}
 					</div>
 				);
 			})}
