@@ -18,7 +18,7 @@ export function TypingAnimation({
 	className,
 	duration = 35,
 	delay = 0,
-	as: Component = 'div',
+	as: Component = 'span',
 	startOnView = false,
 	...props
 }: TypingAnimationProps) {

@@ -132,14 +132,14 @@ export function Form() {
 								</p>
 							)}
 						</div>
-						<Input
+						{/* <Input
 							autoFocus
 							id='usernameInput'
 							type='text'
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
-						/>
-						{/* {!type && step !== 15 && step !== 16 ? (
+						/> */}
+						{!type && step !== 15 && step !== 16 ? (
 							<Input
 								autoFocus
 								id='usernameInput'
@@ -147,7 +147,7 @@ export function Form() {
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
 							/>
-						) : null} */}
+						) : null}
 					</Field>
 				</form>
 			)}
