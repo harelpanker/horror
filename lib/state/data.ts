@@ -27,6 +27,41 @@ export type StepData = {
 	errorMessage: string;
 };
 
+export type SyntaxData = {
+	step: number;
+	syntax: string[];
+};
+
+export const syntaxReference: SyntaxData[] = [
+	{
+		step: 4,
+		syntax: ['create.role {title:viewer, actions: read}'],
+	},
+	{
+		step: 7,
+		syntax: [
+			'create.role {title:editor, actions: view, edit}',
+			'create.role {title:moderator, actions: view, create, edit, delete}',
+		],
+	},
+	{
+		step: 9,
+		syntax: ['create.role {title:admin, actions: assign.role, list.role, delete.role}'],
+	},
+	{
+		step: 12,
+		syntax: ['assing.role {editor:roy234}'],
+	},
+	{
+		step: 13,
+		syntax: ['assing.role {viewer:joseph912}'],
+	},
+	{
+		step: 14,
+		syntax: ['assing.role {editor:robert791}'],
+	},
+];
+
 export const stepsData: StepData[] = [
 	{
 		step: 0,
@@ -67,7 +102,7 @@ export const stepsData: StepData[] = [
 	{
 		step: 4,
 		description: text4,
-		correctAnswer: 'create.role {title:viewer, actions: read}',
+		correctAnswer: syntaxReference[0].syntax[0],
 		incorrectAnswer: '',
 		correctAnswerStep: 6,
 		incorrectAnswerStep: 5,
@@ -94,8 +129,8 @@ export const stepsData: StepData[] = [
 	{
 		step: 7,
 		description: text7,
-		correctAnswer: 'create.role {title:editor, actions: view, edit}',
-		correctAnswer2: 'create.role {title:moderator, actions: view, create, edit, delete}',
+		correctAnswer: syntaxReference[1].syntax[0],
+		correctAnswer2: syntaxReference[1].syntax[1],
 		incorrectAnswer: '',
 		correctAnswerStep: 9,
 		incorrectAnswerStep: 8,
@@ -113,7 +148,7 @@ export const stepsData: StepData[] = [
 	{
 		step: 9,
 		description: text9,
-		correctAnswer: 'create.role {title:admin, actions: assign.role, list.role, delete.role}',
+		correctAnswer: syntaxReference[2].syntax[0],
 		incorrectAnswer: '',
 		correctAnswerStep: 11,
 		incorrectAnswerStep: 10,
@@ -140,7 +175,7 @@ export const stepsData: StepData[] = [
 	{
 		step: 12,
 		description: text12,
-		correctAnswer: 'assing.role {editor:roy234}',
+		correctAnswer: syntaxReference[3].syntax[0],
 		incorrectAnswer: '',
 		correctAnswerStep: 13,
 		incorrectAnswerStep: 12,
@@ -149,7 +184,7 @@ export const stepsData: StepData[] = [
 	{
 		step: 13,
 		description: text13,
-		correctAnswer: 'assing.role {viewer:joseph912}',
+		correctAnswer: syntaxReference[4].syntax[0],
 		incorrectAnswer: '',
 		correctAnswerStep: 14,
 		incorrectAnswerStep: 13,
@@ -158,7 +193,7 @@ export const stepsData: StepData[] = [
 	{
 		step: 14,
 		description: text14,
-		correctAnswer: 'assing.role {editor:robert791}',
+		correctAnswer: syntaxReference[5].syntax[0],
 		incorrectAnswer: '',
 		correctAnswerStep: 15,
 		incorrectAnswerStep: 14,
