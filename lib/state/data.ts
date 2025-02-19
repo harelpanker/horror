@@ -136,7 +136,7 @@ export const stepsData: StepData[] = [
 		incorrectAnswer: '',
 		correctAnswerStep: 9,
 		incorrectAnswerStep: 8,
-		errorMessage: '',
+		errorMessage: ' ',
 	},
 	{
 		step: 8,
